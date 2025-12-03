@@ -3,9 +3,11 @@ package net.labymod.addons.cider.core;
 import net.labymod.addons.cider.core.api.CiderAPI;
 import net.labymod.addons.cider.core.api.CiderAPIFactory;
 import net.labymod.addons.cider.core.api.CiderListener;
+import net.labymod.addons.cider.core.api.CiderPlaybackController;
 import net.labymod.addons.cider.core.api.CiderTrack;
 import net.labymod.addons.cider.core.events.*;
 import net.labymod.addons.cider.core.labymod.hudwidgets.CiderHudWidget;
+import net.labymod.addons.cider.core.networking.CiderNetworkHandler;
 import net.labymod.addons.cider.core.sharing.TrackSharingManager;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.gui.hud.HudWidgetRegistry;
@@ -21,13 +23,17 @@ public class CiderAddon extends LabyAddon<CiderConfiguration> {
 
     private static CiderAddon instance;
     private final CiderAPI ciderAPI;
+    private final CiderPlaybackController playbackController;
     private final TrackSharingManager trackSharingManager;
+    private final CiderNetworkHandler networkHandler;
     private final Icon hudIcon;
 
     public CiderAddon() {
         instance = this;
         this.ciderAPI = CiderAPIFactory.create();
+        this.playbackController = new CiderPlaybackController(null);
         this.trackSharingManager = new TrackSharingManager(this);
+        this.networkHandler = new CiderNetworkHandler(this);
         this.hudIcon = Icon.texture(
             ResourceLocation.create("cider", "themes/vanilla/textures/settings/hud/cider32.png")
         ).resolution(64, 64);
@@ -63,6 +69,9 @@ public class CiderAddon extends LabyAddon<CiderConfiguration> {
         // Initialize Cider API
         initializeCider();
 
+        // Initialize networking
+        networkHandler.initialize();
+
         // Register HUD widgets
         HudWidgetRegistry registry = this.labyAPI().hudWidgetRegistry();
         registry.register(new CiderHudWidget("cider", this.hudIcon, this, this.ciderAPI));
@@ -73,6 +82,7 @@ public class CiderAddon extends LabyAddon<CiderConfiguration> {
         if (ciderAPI.isInitialized()) {
             ciderAPI.stop();
         }
+        networkHandler.shutdown();
     }
 
     /**
@@ -93,6 +103,7 @@ public class CiderAddon extends LabyAddon<CiderConfiguration> {
         String token = requireToken ? configuration().appToken().get() : null;
 
         ciderAPI.updateSettings(apiUrl, token, requireToken);
+        playbackController.updateSettings(apiUrl, token, requireToken);
         ciderAPI.initialize();
         labyAPI().eventBus().fire(new CiderConnectEvent());
     }
@@ -115,8 +126,16 @@ public class CiderAddon extends LabyAddon<CiderConfiguration> {
         return ciderAPI;
     }
 
+    public CiderPlaybackController getPlaybackController() {
+        return playbackController;
+    }
+
     public TrackSharingManager getTrackSharingManager() {
         return trackSharingManager;
+    }
+
+    public CiderNetworkHandler getNetworkHandler() {
+        return networkHandler;
     }
 
     public static CiderAddon get() {

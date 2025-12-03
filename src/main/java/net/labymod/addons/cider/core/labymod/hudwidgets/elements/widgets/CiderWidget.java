@@ -118,8 +118,11 @@ public class CiderWidget extends FlexibleContentWidget implements HudWidget.Upda
         this.playPauseWidget = new IconWidget(this.ciderAPI.isPlaying() ? Textures.SpriteControls.PAUSE : Textures.SpriteControls.PLAY);
         this.playPauseWidget.addId("play");
         this.playPauseWidget.setPressable(() -> {
-            // Note: Cider RPC doesn't support playback control via HTTP
-            // This would require system media keys or WebSocket connection
+            boolean success = this.hudWidget.addon().getPlaybackController().togglePlayPause();
+            if (!success) {
+                // Fallback to system media keys if API doesn't work
+                this.hudWidget.addon().getPlaybackController().useSystemMediaKeys();
+            }
             this.playPauseWidget.icon().set(this.ciderAPI.isPlaying() ? Textures.SpriteControls.PLAY : Textures.SpriteControls.PAUSE);
         });
         this.controlsWidget.addChild(this.playPauseWidget);
@@ -127,14 +130,14 @@ public class CiderWidget extends FlexibleContentWidget implements HudWidget.Upda
         IconWidget previousTrack = new IconWidget(Textures.SpriteControls.PREVIOUS);
         previousTrack.addId("previous");
         previousTrack.setPressable(() -> {
-            // Would require media key control
+            this.hudWidget.addon().getPlaybackController().previous();
         });
         this.controlsWidget.addChild(previousTrack);
 
         IconWidget nextTrack = new IconWidget(Textures.SpriteControls.NEXT);
         nextTrack.addId("next");
         nextTrack.setPressable(() -> {
-            // Would require media key control
+            this.hudWidget.addon().getPlaybackController().next();
         });
         this.controlsWidget.addChild(nextTrack);
 

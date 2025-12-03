@@ -38,7 +38,7 @@ public class TrackSharingManager {
 
     /**
      * Share current track with other players
-     * Note: This requires LabyMod's networking API to actually broadcast
+     * Broadcasts via LabyMod networking
      */
     public void shareCurrentTrack() {
         if (!sharingEnabled) {
@@ -64,10 +64,12 @@ public class TrackSharingManager {
 
             sharedTracks.put(playerUuid, sharedTrack);
 
-            // TODO: Broadcast to other players using LabyMod's networking API
-            // This would typically use LabyMod's server connection or protocol
-            // Example:
-            // addon.labyAPI().networkingAPI().sendPacket(new TrackSharePacket(sharedTrack));
+            // Broadcast to other players using network handler
+            addon.getNetworkHandler().broadcastTrack(
+                track.getName(),
+                track.getArtistName(),
+                track.getAlbumName()
+            );
 
         } catch (Exception e) {
             addon.logger().error("Failed to share track", e);
