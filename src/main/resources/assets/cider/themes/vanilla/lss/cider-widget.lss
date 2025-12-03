@@ -62,6 +62,29 @@
     font-weight: bold;
 }
 
+/* Media Controls */
+#controls {
+    orientation: horizontal;
+    margin-left: 8px;
+    align-items: center;
+}
+
+#controls .icon-widget {
+    width: 16px;
+    height: 16px;
+    margin: 0 2px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+#controls .icon-widget:hover {
+    opacity: 1.0;
+}
+
+#play {
+    margin-right: 4px;
+}
+
 /* Progress Section */
 #progress {
     orientation: horizontal;

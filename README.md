@@ -11,11 +11,17 @@ A LabyMod 4 addon that integrates [Cider](https://cider.sh) (Apple Music client)
 ## Features
 
 - 🎵 **Real-time Track Display** - Shows currently playing track from Cider/Apple Music
-- 🎮 **HUD Widget** - Customizable on-screen display
+- 🎮 **Advanced HUD Widget** - Customizable on-screen display with album artwork
+- 📊 **Animated Progress Bar** - Real-time playback position with time display
+- 🎨 **Album Artwork** - Dynamic cover art loading with caching
+- 🎛️ **Playback Controls** - UI buttons for play/pause/skip (note: requires system media keys)
+- 👥 **Track Sharing** - Share your currently playing track with other players
+- 🏷️ **Nametag Display** - See what other players are listening to above their names
 - 🔄 **Auto-reconnect** - Automatically reconnects when Cider becomes available
 - 🎯 **State Management** - Tracks playing, paused, and stopped states
 - 🔐 **Optional Authentication** - Support for secured Cider RPC instances
 - ⚡ **Event System** - Fires events for track changes, playback changes, and position updates
+- 📐 **Flexible Layout** - Minimized/maximized states, left/right alignment
 
 ## Installation
 
@@ -54,6 +60,8 @@ Access addon settings in: **LabyMod Settings → Addons → Cider**
 | **App Token** | Authentication token (only visible when required) | Empty |
 | **Show Artwork** | Display album artwork | ✅ On |
 | **Show Progress Bar** | Display playback progress | ✅ On |
+| **Enable Track Sharing** | Share your track with other players | ❌ Off |
+| **Show Controls** | Display playback control buttons | ✅ On |
 
 ### Authentication
 
@@ -206,13 +214,15 @@ Contributions are welcome! Please follow these steps:
 
 ## Roadmap
 
-- [ ] Album artwork rendering in HUD
-- [ ] Animated progress bar widget
-- [ ] Track sharing between players
-- [ ] Nametag display for shared tracks
+- [x] Album artwork rendering in HUD
+- [x] Animated progress bar widget
+- [x] Track sharing between players (infrastructure ready)
+- [x] Nametag display for shared tracks (infrastructure ready)
+- [x] Playback controls UI (play/pause/skip)
+- [ ] Full networking integration for track sharing
 - [ ] Discord Rich Presence integration
 - [ ] Lyrics display
-- [ ] Playback controls (play/pause/skip)
+- [ ] Playback control API (requires Cider RPC enhancement)
 
 ## Credits
 

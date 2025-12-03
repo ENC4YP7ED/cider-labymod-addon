@@ -6,6 +6,7 @@ import net.labymod.addons.cider.core.api.CiderListener;
 import net.labymod.addons.cider.core.api.CiderTrack;
 import net.labymod.addons.cider.core.events.*;
 import net.labymod.addons.cider.core.labymod.hudwidgets.CiderHudWidget;
+import net.labymod.addons.cider.core.sharing.TrackSharingManager;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.gui.hud.HudWidgetRegistry;
 import net.labymod.api.client.gui.icon.Icon;
@@ -20,11 +21,13 @@ public class CiderAddon extends LabyAddon<CiderConfiguration> {
 
     private static CiderAddon instance;
     private final CiderAPI ciderAPI;
+    private final TrackSharingManager trackSharingManager;
     private final Icon hudIcon;
 
     public CiderAddon() {
         instance = this;
         this.ciderAPI = CiderAPIFactory.create();
+        this.trackSharingManager = new TrackSharingManager(this);
         this.hudIcon = Icon.texture(
             ResourceLocation.create("cider", "themes/vanilla/textures/settings/hud/cider32.png")
         ).resolution(64, 64);
@@ -110,6 +113,10 @@ public class CiderAddon extends LabyAddon<CiderConfiguration> {
 
     public CiderAPI getCiderAPI() {
         return ciderAPI;
+    }
+
+    public TrackSharingManager getTrackSharingManager() {
+        return trackSharingManager;
     }
 
     public static CiderAddon get() {

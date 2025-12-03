@@ -37,6 +37,8 @@ public class CiderWidget extends FlexibleContentWidget implements HudWidget.Upda
     private ComponentWidget trackWidget;
     private ComponentWidget artistWidget;
     private IconWidget coverWidget;
+    private DivWidget controlsWidget;
+    private IconWidget playPauseWidget;
     private ComponentWidget currentTimeWidget;
     private ComponentWidget totalTimeWidget;
 
@@ -109,7 +111,41 @@ public class CiderWidget extends FlexibleContentWidget implements HudWidget.Upda
         this.artistWidget = ComponentWidget.empty();
         text.addChild(this.artistWidget);
 
-        textContainer.addFlexibleContent(text);
+        // Media controls
+        this.controlsWidget = new DivWidget();
+        this.controlsWidget.addId("controls");
+
+        this.playPauseWidget = new IconWidget(this.ciderAPI.isPlaying() ? Textures.SpriteControls.PAUSE : Textures.SpriteControls.PLAY);
+        this.playPauseWidget.addId("play");
+        this.playPauseWidget.setPressable(() -> {
+            // Note: Cider RPC doesn't support playback control via HTTP
+            // This would require system media keys or WebSocket connection
+            this.playPauseWidget.icon().set(this.ciderAPI.isPlaying() ? Textures.SpriteControls.PLAY : Textures.SpriteControls.PAUSE);
+        });
+        this.controlsWidget.addChild(this.playPauseWidget);
+
+        IconWidget previousTrack = new IconWidget(Textures.SpriteControls.PREVIOUS);
+        previousTrack.addId("previous");
+        previousTrack.setPressable(() -> {
+            // Would require media key control
+        });
+        this.controlsWidget.addChild(previousTrack);
+
+        IconWidget nextTrack = new IconWidget(Textures.SpriteControls.NEXT);
+        nextTrack.addId("next");
+        nextTrack.setPressable(() -> {
+            // Would require media key control
+        });
+        this.controlsWidget.addChild(nextTrack);
+
+        if (leftAligned) {
+            textContainer.addFlexibleContent(text);
+            textContainer.addContent(this.controlsWidget);
+        } else {
+            textContainer.addContent(this.controlsWidget);
+            textContainer.addFlexibleContent(text);
+        }
+
         player.addFlexibleContent(textContainer);
 
         // Progress section
@@ -175,6 +211,10 @@ public class CiderWidget extends FlexibleContentWidget implements HudWidget.Upda
             return;
         }
 
+        if (reason.equals("playback_change") && this.playPauseWidget != null) {
+            this.playPauseWidget.icon().set(this.ciderAPI.isPlaying() ? Textures.SpriteControls.PAUSE : Textures.SpriteControls.PLAY);
+        }
+
         if (reason.equals("track_change")) {
             this.updateTrack(this.ciderAPI.getCurrentTrack());
         }
@@ -199,7 +239,14 @@ public class CiderWidget extends FlexibleContentWidget implements HudWidget.Upda
         this.artistWidget.setVisible(true);
 
         if (track == null || track.getDuration() <= 0) {
+            if (this.controlsWidget != null) {
+                this.controlsWidget.setVisible(false);
+            }
             return;
+        }
+
+        if (this.controlsWidget != null) {
+            this.controlsWidget.setVisible(true);
         }
 
         int length = (int) track.getDuration();

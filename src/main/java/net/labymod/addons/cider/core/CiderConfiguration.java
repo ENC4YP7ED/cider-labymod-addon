@@ -32,6 +32,12 @@ public class CiderConfiguration extends AddonConfig {
     @SwitchSetting
     private final ConfigProperty<Boolean> showProgressBar = new ConfigProperty<>(true);
 
+    @SwitchSetting
+    private final ConfigProperty<Boolean> enableTrackSharing = new ConfigProperty<>(false);
+
+    @SwitchSetting
+    private final ConfigProperty<Boolean> showControls = new ConfigProperty<>(true);
+
     public ConfigProperty<Boolean> enabled() {
         return enabled;
     }
@@ -54,5 +60,13 @@ public class CiderConfiguration extends AddonConfig {
 
     public ConfigProperty<Boolean> showProgressBar() {
         return showProgressBar;
+    }
+
+    public ConfigProperty<Boolean> enableTrackSharing() {
+        return enableTrackSharing;
+    }
+
+    public ConfigProperty<Boolean> showControls() {
+        return showControls;
     }
 }
