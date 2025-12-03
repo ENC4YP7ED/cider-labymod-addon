@@ -1,0 +1,12 @@
+{
+  "uuid": "c1de7-a44-0n-1234-567890abcdef",
+  "namespace": "cider",
+  "displayName": "Cider",
+  "author": "Custom",
+  "version": "1.0.0",
+  "description": "Display your Apple Music now playing from Cider in Minecraft",
+  "iconUrl": "https://cider.sh/logo.png",
+  "category": "MISC",
+  "minecraftVersion": "1.20.1",
+  "main": "net.labymod.addons.cider.core.CiderAddon"
+}

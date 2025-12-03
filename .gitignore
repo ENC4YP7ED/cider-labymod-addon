@@ -1,0 +1,61 @@
+# Gradle
+.gradle/
+build/
+out/
+bin/
+
+# IDE
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+*.code-workspace
+.settings/
+.classpath
+.project
+
+# LabyMod
+run/
+.labymod/
+logs/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Backups
+*.bak
+*.backup
+*.old
+
+# Decompiled sources (keep for reference but don't commit)
+decompiled/
+
+# Python (from Flask server if present)
+__pycache__/
+*.py[cod]
+*.so
+.Python
+*.egg-info/
+.env
+venv/
+env/
+
+# Temporary files
+*.tmp
+*.log
+*.swp
+*.swo
+*~
+
+# Compiled
+*.class
+*.jar
+!gradle-wrapper.jar
+
+# LabyMod specific
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
