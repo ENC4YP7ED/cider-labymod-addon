@@ -1,0 +1,110 @@
+/* Cider Widget Styling */
+
+.cider-widget {
+    orientation: horizontal;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    padding: 4px;
+}
+
+/* Cover Artwork */
+#cover {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+}
+
+.cider-widget.no-cover #cover {
+    display: none;
+}
+
+/* Progress Bar - Minimized (overlay on cover) */
+#minimized-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: rgba(0, 0, 0, 0.5);
+    foreground-color: #FA586D;
+    display: var(--progress-visible, none);
+}
+
+.cider-widget.maximized #minimized-bar {
+    display: none;
+}
+
+/* Player Container */
+#player {
+    orientation: vertical;
+    flex-grow: 1;
+}
+
+/* Text and Controls Container */
+#text-and-control {
+    orientation: horizontal;
+    margin-bottom: 4px;
+}
+
+/* Text Container */
+#text {
+    orientation: vertical;
+    flex-grow: 1;
+}
+
+#text .component-widget {
+    color: white;
+    font-size: 12px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+#text .component-widget:first-child {
+    font-weight: bold;
+}
+
+/* Progress Section */
+#progress {
+    orientation: horizontal;
+    align-items: center;
+    margin-top: 4px;
+    display: var(--large-progress-visible, none);
+}
+
+#progress .component-widget {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 10px;
+    margin: 0 4px;
+}
+
+/* Full Progress Bar */
+#full-bar {
+    flex-grow: 1;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    foreground-color: #FA586D;
+}
+
+/* Left/Right Alignment */
+.cider-widget.left {
+    flex-direction: row;
+}
+
+.cider-widget.right {
+    flex-direction: row-reverse;
+}
+
+.cider-widget.right #cover {
+    margin-right: 0;
+    margin-left: 8px;
+}
+
+/* Minimized State */
+.cider-widget:not(.maximized) #player {
+    display: none;
+}
+
+.cider-widget:not(.maximized) #cover {
+    width: 32px;
+    height: 32px;
+}
