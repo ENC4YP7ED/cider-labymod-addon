@@ -1,7 +1,6 @@
 plugins {
-    id("java-library")
-    id("net.labymod.gradle")
-    id("net.labymod.gradle.addon")
+    id("net.labymod.labygradle")
+    id("net.labymod.labygradle.addon")
 }
 
 group = "net.labymod.addons"
@@ -22,7 +21,7 @@ labyMod {
     }
 
     minecraft {
-        registerVersion("1.20.1", "1.20.1") {
+        registerVersion("1.20.1") {
             runs {
                 getByName("client") {
                     // Development client configuration
@@ -30,24 +29,12 @@ labyMod {
             }
         }
     }
-
-    addonDev {
-        productionRelease()
-    }
-}
-
-dependencies {
-    // Gson for JSON parsing
-    api("com.google.code.gson:gson:2.10.1")
 }
 
 subprojects {
-    plugins.apply("java-library")
-    plugins.apply("net.labymod.gradle")
-    plugins.apply("net.labymod.gradle.addon")
+    plugins.apply("net.labymod.labygradle")
+    plugins.apply("net.labymod.labygradle.addon")
 
-    repositories {
-        maven("https://repo.labymod.net/repository/maven-public/")
-        mavenCentral()
-    }
+    group = rootProject.group
+    version = rootProject.version
 }

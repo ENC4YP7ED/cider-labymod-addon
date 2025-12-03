@@ -1,21 +1,23 @@
+rootProject.name = "cider"
+
 pluginManagement {
-    repositories {
-        maven("https://repo.labymod.net/repository/gradle-plugins/")
-        gradlePluginPortal()
-        mavenCentral()
-    }
-
-    plugins {
-        id("net.labymod.gradle") version "0.3.28"
-        id("net.labymod.gradle.addon") version "0.3.28"
-    }
-
+    val labyGradlePluginVersion = "0.5.9"
     buildscript {
         repositories {
-            maven("https://repo.labymod.net/repository/gradle-plugins/")
+            maven("https://dist.labymod.net/api/v1/maven/release/")
+            maven("https://maven.neoforged.net/releases/")
+            maven("https://maven.fabricmc.net/")
             gradlePluginPortal()
+            mavenCentral()
+        }
+
+        dependencies {
+            classpath("net.labymod.gradle", "common", labyGradlePluginVersion)
         }
     }
 }
 
-rootProject.name = "cider"
+plugins.apply("net.labymod.labygradle.settings")
+
+include(":api")
+include(":core")
