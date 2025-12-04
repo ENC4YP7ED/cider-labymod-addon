@@ -16,12 +16,40 @@ labyMod {
         displayName = "Cider"
         author = "Custom"
         description = "Display your Apple Music now playing from Cider in Minecraft"
-        minecraftVersion = "1.20<1.21"
+        minecraftVersion = "1.20<1.22"
         version = System.getenv().getOrDefault("VERSION", "1.0.0")
     }
 
     minecraft {
         registerVersion("1.20.1") {
+            runs {
+                getByName("client") {
+                    // Development client configuration
+                }
+            }
+        }
+        registerVersion("1.20.2") {
+            runs {
+                getByName("client") {
+                    // Development client configuration
+                }
+            }
+        }
+        registerVersion("1.20.4") {
+            runs {
+                getByName("client") {
+                    // Development client configuration
+                }
+            }
+        }
+        registerVersion("1.20.6") {
+            runs {
+                getByName("client") {
+                    // Development client configuration
+                }
+            }
+        }
+        registerVersion("1.21") {
             runs {
                 getByName("client") {
                     // Development client configuration

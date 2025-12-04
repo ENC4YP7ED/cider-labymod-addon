@@ -59,3 +59,4 @@ env/
 # LabyMod specific
 *.jar
 !gradle/wrapper/gradle-wrapper.jar
+gradle.zip

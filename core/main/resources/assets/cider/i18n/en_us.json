@@ -1,0 +1,68 @@
+{
+  "cider": {
+    "name": "Cider",
+    "description": "Display your Apple Music now playing from Cider in Minecraft",
+
+    "settings": {
+      "enabled": {
+        "name": "Enabled"
+      },
+      "apiUrl": {
+        "name": "API URL"
+      },
+      "requireApiToken": {
+        "name": "Require API Token"
+      },
+      "appToken": {
+        "name": "App Token"
+      },
+
+      "display": {
+        "name": "Display Settings"
+      },
+      "showArtwork": {
+        "name": "Show Artwork"
+      },
+      "showProgressBar": {
+        "name": "Show Progress Bar"
+      },
+      "showControls": {
+        "name": "Show Controls"
+      },
+
+      "sharing": {
+        "name": "Sharing"
+      },
+      "enableTrackSharing": {
+        "name": "Enable Track Sharing"
+      }
+    },
+
+    "hudWidget": {
+      "cider": {
+        "name": "Cider Widget",
+        "showCover": {
+          "name": "Show Album Cover"
+        },
+        "minimizeIngame": {
+          "name": "Minimize In-Game"
+        }
+      },
+      "ciderText": {
+        "name": "Cider Text Widget"
+      },
+      "notPlaying": "Not playing",
+      "track": "Track",
+      "artist": "Artist",
+      "loading": "Loading..."
+    },
+
+    "category": {
+      "name": "Music"
+    },
+
+    "interaction": {
+      "shareTrack": "Share Current Track"
+    }
+  }
+}

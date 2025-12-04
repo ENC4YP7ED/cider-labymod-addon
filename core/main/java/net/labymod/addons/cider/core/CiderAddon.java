@@ -6,14 +6,19 @@ import net.labymod.addons.cider.core.api.CiderListener;
 import net.labymod.addons.cider.core.api.CiderPlaybackController;
 import net.labymod.addons.cider.core.api.CiderTrack;
 import net.labymod.addons.cider.core.events.*;
+import net.labymod.addons.cider.core.interaction.ShareTrackBulletPoint;
 import net.labymod.addons.cider.core.labymod.hudwidgets.CiderHudWidget;
+import net.labymod.addons.cider.core.labymod.hudwidgets.CiderTextHudWidget;
 import net.labymod.addons.cider.core.networking.CiderNetworkHandler;
 import net.labymod.addons.cider.core.sharing.TrackSharingManager;
+import net.labymod.api.Laby;
 import net.labymod.api.addon.LabyAddon;
 import net.labymod.api.client.gui.hud.HudWidgetRegistry;
 import net.labymod.api.client.gui.icon.Icon;
 import net.labymod.api.client.resources.ResourceLocation;
 import net.labymod.api.models.addon.annotation.AddonMain;
+import net.labymod.api.revision.SimpleRevision;
+import net.labymod.api.util.version.SemanticVersion;
 
 /**
  * Main addon class for Cider integration
@@ -34,9 +39,15 @@ public class CiderAddon extends LabyAddon<CiderConfiguration> {
         this.playbackController = new CiderPlaybackController(null);
         this.trackSharingManager = new TrackSharingManager(this);
         this.networkHandler = new CiderNetworkHandler(this);
-        this.hudIcon = Icon.texture(
-            ResourceLocation.create("cider", "themes/vanilla/textures/settings/hud/cider32.png")
-        ).resolution(64, 64);
+        this.hudIcon = Textures.HudWidget.CIDER_32;
+    }
+
+    @Override
+    protected void preConfigurationLoad() {
+        // Register config migration revisions
+        Laby.references().revisionRegistry().register(
+            new SimpleRevision("cider", new SemanticVersion("1.0.0"), "2024-12-04")
+        );
     }
 
     @Override
@@ -75,6 +86,10 @@ public class CiderAddon extends LabyAddon<CiderConfiguration> {
         // Register HUD widgets
         HudWidgetRegistry registry = this.labyAPI().hudWidgetRegistry();
         registry.register(new CiderHudWidget("cider", this.hudIcon, this, this.ciderAPI));
+        registry.register(new CiderTextHudWidget("cider-text", this.hudIcon, this.ciderAPI));
+
+        // Register interaction menu bullet points
+        this.labyAPI().interactionMenuRegistry().register(new ShareTrackBulletPoint(this));
     }
 
     @Override

@@ -2,14 +2,14 @@ package net.labymod.addons.cider.core.api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import net.labymod.api.Laby;
+import net.labymod.api.util.concurrent.task.Task;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,7 +25,7 @@ public class CiderAPI {
     private boolean requireToken;
     private final Gson gson;
     private final List<CiderListener> listeners;
-    private ScheduledExecutorService executor;
+    private Task pollTask;
 
     private CiderTrack currentTrack;
     private boolean isPlaying;
@@ -59,10 +59,12 @@ public class CiderAPI {
         }
 
         isInitialized = true;
-        executor = Executors.newSingleThreadScheduledExecutor();
 
-        // Start polling for track changes
-        executor.scheduleAtFixedRate(this::poll, 0, POLL_INTERVAL_MS, TimeUnit.MILLISECONDS);
+        // Start polling for track changes using Task pattern
+        this.pollTask = Task.builder(this::poll)
+            .repeat(POLL_INTERVAL_MS, TimeUnit.MILLISECONDS)
+            .build();
+        this.pollTask.execute();
     }
 
     /**
@@ -74,13 +76,9 @@ public class CiderAPI {
         }
 
         isInitialized = false;
-        if (executor != null) {
-            executor.shutdown();
-            try {
-                executor.awaitTermination(5, TimeUnit.SECONDS);
-            } catch (InterruptedException e) {
-                executor.shutdownNow();
-            }
+        if (this.pollTask != null) {
+            this.pollTask.cancel();
+            this.pollTask = null;
         }
 
         notifyDisconnect();
@@ -129,7 +127,7 @@ public class CiderAPI {
             notifyPositionChanged(track.getCurrentTime(), track.getDuration());
 
         } catch (Exception e) {
-            System.err.println("Error polling Cider API: " + e.getMessage());
+            // Silently handle polling errors
         }
     }
 
@@ -239,7 +237,6 @@ public class CiderAPI {
             conn.disconnect();
             return null;
         } catch (Exception e) {
-            System.err.println("Error getting now playing: " + e.getMessage());
             return null;
         }
     }
