@@ -5,8 +5,8 @@
   "author": "Custom",
   "version": "1.0.0",
   "description": "Display your Apple Music now playing from Cider in Minecraft",
-  "iconUrl": "https://cider.sh/logo.png",
+  "icon": "textures/icon.png",
   "category": "MISC",
-  "minecraftVersion": "1.20.1",
+  "minecraftVersion": "1.20<1.22",
   "main": "net.labymod.addons.cider.core.CiderAddon"
 }

@@ -60,3 +60,6 @@ env/
 *.jar
 !gradle/wrapper/gradle-wrapper.jar
 gradle.zip
+
+# Downloaded Cider icon (fetched during build, not committed)
+**/textures/icon.png

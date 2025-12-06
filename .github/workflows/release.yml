@@ -33,8 +33,22 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Download Cider icon
+        run: |
+          echo "Downloading Cider icon from official repository..."
+          mkdir -p core/main/resources/textures
+          curl -L -o core/main/resources/textures/icon.png https://raw.githubusercontent.com/ciderapp/cider.sh/main/public/icon.png
+          echo "Icon downloaded successfully"
+
       - name: Build with Gradle
         run: ./gradlew build --no-daemon --stacktrace
+
+      - name: Clean up downloaded icon
+        if: always()
+        run: |
+          echo "Removing downloaded icon..."
+          rm -f core/main/resources/textures/icon.png
+          echo "Icon removed"
 
       - name: Find built JAR files
         id: find-jars

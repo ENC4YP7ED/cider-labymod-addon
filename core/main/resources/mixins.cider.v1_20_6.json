@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "priority": 1000,
+  "package": "net.labymod.addons.cider.v1_20_6.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "cider-v1_20_6.refmap.json",
+  "mixins": [],
+  "client": [
+    "MixinGuiGraphics"
+  ],
+  "server": [],
+  "minVersion": "0.8",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "verbose": false
+}
