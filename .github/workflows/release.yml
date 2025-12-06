@@ -1,0 +1,97 @@
+name: Stable Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (e.g., 1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  stable-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew build --no-daemon --stacktrace
+
+      - name: Find built JAR files
+        id: find-jars
+        run: |
+          echo "Finding JAR files..."
+          JAR_FILE=$(find ./build/libs -type f -name "*.jar" ! -name "*-sources.jar" ! -name "*-javadoc.jar" | head -1)
+          if [ -z "$JAR_FILE" ]; then
+            JAR_FILE=$(find ./core/build/libs -type f -name "*.jar" ! -name "*-sources.jar" ! -name "*-javadoc.jar" | head -1)
+          fi
+          if [ -z "$JAR_FILE" ]; then
+            echo "No JAR file found!"
+            exit 1
+          fi
+          echo "jar_file=$JAR_FILE" >> $GITHUB_OUTPUT
+          echo "jar_name=$(basename $JAR_FILE)" >> $GITHUB_OUTPUT
+          echo "Found JAR: $JAR_FILE"
+
+      - name: Get version
+        id: get-version
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+            VERSION="${{ inputs.version }}"
+          else
+            VERSION="${GITHUB_REF#refs/tags/v}"
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+
+      - name: Create Stable Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.get-version.outputs.version }}
+          JAR_FILE: ${{ steps.find-jars.outputs.jar_file }}
+        run: |
+          TAG_NAME="v${VERSION}"
+
+          # Create stable release
+          gh release create "$TAG_NAME" \
+            --title "v${VERSION}" \
+            --notes "## Cider Addon v${VERSION}
+
+          **Release Date:** $(date -u +"%Y-%m-%d")
+          **Commit:** [\`${GITHUB_SHA:0:7}\`](https://github.com/${{ github.repository }}/commit/$GITHUB_SHA)
+
+          ### 📥 Installation
+          1. Download the JAR file below
+          2. Place in LabyMod addons folder (\`~/.minecraft/labymod-neo/addons\`)
+          3. Restart Minecraft
+
+          ### 📋 Requirements
+          - LabyMod 4 (build 1800+)
+          - Minecraft 1.20-1.21
+          - Java 17+
+
+          ---
+          🤖 Built via GitHub Actions" \
+            "$JAR_FILE"
+
+          echo "✅ Stable release v${VERSION} created successfully!"
+          echo "🔗 Release URL: https://github.com/${{ github.repository }}/releases/tag/$TAG_NAME"
