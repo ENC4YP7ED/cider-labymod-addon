@@ -21,6 +21,7 @@ public class CiderConfiguration extends AddonConfig {
 
     // General Settings
     @SwitchSetting
+    @ConfigName("enabled")
     private final ConfigProperty<Boolean> enabled = new ConfigProperty<Boolean>(true).addChangeListener((property, prevValue, newValue) -> {
         CiderAddon addon = CiderAddon.get();
         if (addon == null) {
@@ -34,55 +35,69 @@ public class CiderConfiguration extends AddonConfig {
     });
 
     @TextFieldSetting
+    @ConfigName("apiUrl")
     private final ConfigProperty<String> apiUrl = new ConfigProperty<>("http://localhost:10767");
 
     @SwitchSetting
+    @ConfigName("requireApiToken")
     private final ConfigProperty<Boolean> requireApiToken = new ConfigProperty<>(false);
 
     @TextFieldSetting
+    @ConfigName("appToken")
     @ShowSettingIf(value = "requireApiToken", equals = "true")
     private final ConfigProperty<String> appToken = new ConfigProperty<>("");
 
     // Display Settings
     @SettingSection("display")
     @SwitchSetting
+    @ConfigName("showArtwork")
     private final ConfigProperty<Boolean> showArtwork = new ConfigProperty<>(true);
 
     @SwitchSetting
+    @ConfigName("showProgressBar")
     private final ConfigProperty<Boolean> showProgressBar = new ConfigProperty<>(true);
 
     @SwitchSetting
+    @ConfigName("showControls")
     private final ConfigProperty<Boolean> showControls = new ConfigProperty<>(true);
 
     @SwitchSetting
+    @ConfigName("showOnTitleScreen")
     private final ConfigProperty<Boolean> showOnTitleScreen = new ConfigProperty<>(true);
 
     @SwitchSetting
+    @ConfigName("showActionBar")
     private final ConfigProperty<Boolean> showActionBar = new ConfigProperty<>(false);
 
     // Integration Settings
     @SettingSection("integration")
     @SwitchSetting
+    @ConfigName("showTrackInChat")
     private final ConfigProperty<Boolean> showTrackInChat = new ConfigProperty<>(true);
 
     @SwitchSetting
+    @ConfigName("showPauseScreenControls")
     private final ConfigProperty<Boolean> showPauseScreenControls = new ConfigProperty<>(true);
 
     @SwitchSetting
+    @ConfigName("showMusicNotes")
     private final ConfigProperty<Boolean> showMusicNotes = new ConfigProperty<>(false);
 
     // Performance Settings
     @SettingSection("performance")
     @SwitchSetting
+    @ConfigName("optimizeRendering")
     private final ConfigProperty<Boolean> optimizeRendering = new ConfigProperty<>(true);
 
     // Sharing Settings
     @SettingSection("sharing")
     @SwitchSetting
+    @ConfigName("enableTrackSharing")
     private final ConfigProperty<Boolean> enableTrackSharing = new ConfigProperty<>(false);
 
     @MethodOrder(after = "enableTrackSharing")
     @ActivitySetting
+    @ConfigName("trackHistory")
     @IntroducedIn(namespace = "cider", value = "1.0.0")
     public Activity trackHistory() {
         return new TrackHistoryActivity(CiderAddon.get());

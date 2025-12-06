@@ -41,11 +41,12 @@ public class ShareTrackBulletPoint implements BulletPoint {
 
         Laby.labyAPI().minecraft().executeNextTick(() -> {
             // Open chat with pre-filled message
-            String message = String.format("/msg %s I'm listening to: %s by %s",
-                player.getName(),
+            String trackMessage = String.format(
+                net.labymod.api.util.I18n.translate("cider.interaction.shareTrack.message"),
                 currentTrack.getName(),
                 currentTrack.getArtist()
             );
+            String message = String.format("/msg %s %s", player.getName(), trackMessage);
             Laby.labyAPI().minecraft().openChat(message);
         });
     }

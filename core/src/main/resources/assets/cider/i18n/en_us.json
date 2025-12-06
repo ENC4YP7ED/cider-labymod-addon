@@ -1,0 +1,79 @@
+{
+  "cider.name": "Cider",
+  "cider.description": "Display your Apple Music now playing from Cider in Minecraft",
+
+  "cider.settings.general": "General",
+  "cider.settings.enabled": "Enabled",
+  "cider.settings.enabled.desc": "Enable or disable the Cider addon",
+  "cider.settings.apiUrl": "API URL",
+  "cider.settings.apiUrl.desc": "The URL of your Cider Remote API",
+  "cider.settings.requireApiToken": "Require API Token",
+  "cider.settings.requireApiToken.desc": "Enable if your Cider instance requires authentication",
+  "cider.settings.appToken": "App Token",
+  "cider.settings.appToken.desc": "Your Cider Remote API token",
+
+  "cider.settings.display": "Display",
+  "cider.settings.showArtwork": "Show Artwork",
+  "cider.settings.showArtwork.desc": "Display album artwork in the HUD widget",
+  "cider.settings.showProgressBar": "Show Progress Bar",
+  "cider.settings.showProgressBar.desc": "Display a progress bar showing playback position",
+  "cider.settings.showControls": "Show Controls",
+  "cider.settings.showControls.desc": "Display playback controls in the HUD",
+  "cider.settings.showOnTitleScreen": "Show on Title Screen",
+  "cider.settings.showOnTitleScreen.desc": "Display the HUD widget on the main menu",
+  "cider.settings.showActionBar": "Show in Action Bar",
+  "cider.settings.showActionBar.desc": "Display now playing info in the action bar",
+
+  "cider.settings.integration": "Integration",
+  "cider.settings.showTrackInChat": "Show Track in Chat",
+  "cider.settings.showTrackInChat.desc": "Display track changes as chat messages",
+  "cider.settings.showPauseScreenControls": "Pause Screen Controls",
+  "cider.settings.showPauseScreenControls.desc": "Show playback controls on the pause screen",
+  "cider.settings.showMusicNotes": "Show Music Notes",
+  "cider.settings.showMusicNotes.desc": "Display music note particles around the player",
+
+  "cider.settings.performance": "Performance",
+  "cider.settings.optimizeRendering": "Optimize Rendering",
+  "cider.settings.optimizeRendering.desc": "Enable rendering optimizations for better performance",
+
+  "cider.settings.sharing": "Sharing",
+  "cider.settings.enableTrackSharing": "Enable Track Sharing",
+  "cider.settings.enableTrackSharing.desc": "Share your currently playing track with other players",
+  "cider.settings.trackHistory": "Track History",
+  "cider.settings.trackHistory.desc": "View your recently played tracks",
+
+  "cider.hud.notPlaying": "Not playing",
+  "cider.hud.clickToRetry": "Click to retry",
+  "cider.hud.loading": "Loading...",
+  "cider.hud.track": "Track",
+  "cider.hud.artist": "Artist",
+  "cider.hud.position": "Position",
+  "cider.hud.duration": "Duration",
+
+  "cider.nametag.prefix": "♫ ",
+  "cider.nametag.separator": " - ",
+
+  "cider.interaction.shareTrack": "Share Track",
+  "cider.interaction.shareTrack.desc": "Share your currently playing track",
+  "cider.interaction.shareTrack.message": "I'm listening to: %s by %s",
+
+  "cider.activity.trackHistory.title": "Track History",
+  "cider.activity.trackHistory.empty": "No track history available yet",
+  "cider.activity.trackHistory.separator": " • ",
+
+  "cider.status.connecting": "Connecting to Cider...",
+  "cider.status.connected": "Connected to Cider",
+  "cider.status.disconnected": "Disconnected from Cider",
+  "cider.status.error": "Failed to connect to Cider",
+  "cider.status.reconnecting": "Reconnecting...",
+
+  "cider.log.trackBroadcast": "Broadcasting track: %s - %s",
+  "cider.log.trackReceived": "Received track from %s: %s - %s",
+  "cider.log.connectionEstablished": "Connection established with Cider at %s",
+  "cider.log.connectionFailed": "Failed to connect to Cider: %s",
+
+  "cider.error.apiUnavailable": "Cider API is unavailable",
+  "cider.error.invalidToken": "Invalid API token",
+  "cider.error.connectionTimeout": "Connection timeout",
+  "cider.error.networkError": "Network error: %s"
+}

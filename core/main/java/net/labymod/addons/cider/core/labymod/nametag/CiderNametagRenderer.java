@@ -39,8 +39,8 @@ public class CiderNametagRenderer {
 
         // Create component for track info
         Component trackInfo = Component.text()
-            .append(Component.text("♫ ", NamedTextColor.RED))
-            .append(Component.text(sharedTrack.getArtistName() + " - " + sharedTrack.getTrackName(), NamedTextColor.GRAY))
+            .append(Component.text(net.labymod.api.util.I18n.translate("cider.nametag.prefix"), NamedTextColor.RED))
+            .append(Component.text(sharedTrack.getArtistName() + net.labymod.api.util.I18n.translate("cider.nametag.separator") + sharedTrack.getTrackName(), NamedTextColor.GRAY))
             .build();
 
         // Add to nametag (this would be rendered above the player's name)
@@ -56,8 +56,8 @@ public class CiderNametagRenderer {
      */
     public Component getTrackComponent(SharedTrack track) {
         return Component.text()
-            .append(Component.text("♫ ", NamedTextColor.RED))
-            .append(Component.text(track.getArtistName() + " - ", NamedTextColor.GRAY))
+            .append(Component.text(net.labymod.api.util.I18n.translate("cider.nametag.prefix"), NamedTextColor.RED))
+            .append(Component.text(track.getArtistName() + net.labymod.api.util.I18n.translate("cider.nametag.separator"), NamedTextColor.GRAY))
             .append(Component.text(track.getTrackName(), NamedTextColor.WHITE))
             .build();
     }

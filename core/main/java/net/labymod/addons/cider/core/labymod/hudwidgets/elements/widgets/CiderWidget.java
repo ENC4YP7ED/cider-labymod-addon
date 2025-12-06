@@ -237,8 +237,8 @@ public class CiderWidget extends FlexibleContentWidget implements HudWidget.Upda
             return;
         }
 
-        this.trackWidget.setComponent(Component.text(track == null ? "Not playing" : track.getName()));
-        this.artistWidget.setComponent(Component.text(track == null ? "Click to retry" : track.getArtistName()));
+        this.trackWidget.setComponent(Component.text(track == null ? net.labymod.api.util.I18n.translate("cider.hud.notPlaying") : track.getName()));
+        this.artistWidget.setComponent(Component.text(track == null ? net.labymod.api.util.I18n.translate("cider.hud.clickToRetry") : track.getArtistName()));
         this.artistWidget.setVisible(true);
 
         if (track == null || track.getDuration() <= 0) {

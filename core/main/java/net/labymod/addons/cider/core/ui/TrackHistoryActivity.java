@@ -44,13 +44,13 @@ public class TrackHistoryActivity extends Activity {
 
         // Title
         ComponentWidget titleWidget = ComponentWidget.text(
-            Component.text("Track History", NamedTextColor.WHITE)
+            Component.text(net.labymod.api.util.I18n.translate("cider.activity.trackHistory.title"), NamedTextColor.WHITE)
         ).addId("history-title");
 
         // Info text if no history
         if (trackHistory.isEmpty()) {
             ComponentWidget infoWidget = ComponentWidget.text(
-                Component.text("No track history available yet", NamedTextColor.GRAY)
+                Component.text(net.labymod.api.util.I18n.translate("cider.activity.trackHistory.empty"), NamedTextColor.GRAY)
             ).addId("no-history-info");
 
             container.addContent(titleWidget);

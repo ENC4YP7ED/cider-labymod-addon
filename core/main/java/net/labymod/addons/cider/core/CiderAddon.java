@@ -9,6 +9,7 @@ import net.labymod.addons.cider.core.events.*;
 import net.labymod.addons.cider.core.interaction.ShareTrackBulletPoint;
 import net.labymod.addons.cider.core.labymod.hudwidgets.CiderHudWidget;
 import net.labymod.addons.cider.core.labymod.hudwidgets.CiderTextHudWidget;
+import net.labymod.addons.cider.core.listener.ServerEventListener;
 import net.labymod.addons.cider.core.networking.CiderNetworkHandler;
 import net.labymod.addons.cider.core.sharing.TrackSharingManager;
 import net.labymod.api.Laby;
@@ -90,6 +91,9 @@ public class CiderAddon extends LabyAddon<CiderConfiguration> {
 
         // Register interaction menu bullet points
         this.labyAPI().interactionMenuRegistry().register(new ShareTrackBulletPoint(this));
+
+        // Register server event listener for cleanup
+        this.registerListener(new ServerEventListener(this));
     }
 
     @Override

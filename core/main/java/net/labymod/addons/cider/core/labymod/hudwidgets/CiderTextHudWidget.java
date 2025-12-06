@@ -31,8 +31,14 @@ public class CiderTextHudWidget extends TextHudWidget<TextHudWidgetConfig> {
     @Override
     public void load(TextHudWidgetConfig config) {
         super.load(config);
-        this.trackLine = super.createLine("Track", "Loading...");
-        this.artistLine = super.createLine("Artist", "Loading...");
+        this.trackLine = super.createLine(
+            net.labymod.api.util.I18n.translate("cider.hud.track"),
+            net.labymod.api.util.I18n.translate("cider.hud.loading")
+        );
+        this.artistLine = super.createLine(
+            net.labymod.api.util.I18n.translate("cider.hud.artist"),
+            net.labymod.api.util.I18n.translate("cider.hud.loading")
+        );
         this.setIcon(this.hudWidgetIcon);
         this.updateTrack();
     }
@@ -74,8 +80,8 @@ public class CiderTextHudWidget extends TextHudWidget<TextHudWidgetConfig> {
             this.trackLine.updateAndFlush(track.getName());
             this.artistLine.updateAndFlush(track.getArtist());
         } else {
-            this.trackLine.updateAndFlush("Not playing");
-            this.artistLine.updateAndFlush("Not playing");
+            this.trackLine.updateAndFlush(net.labymod.api.util.I18n.translate("cider.hud.notPlaying"));
+            this.artistLine.updateAndFlush(net.labymod.api.util.I18n.translate("cider.hud.notPlaying"));
         }
     }
 }
