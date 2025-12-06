@@ -3,7 +3,7 @@
   "priority": 1000,
   "package": "net.labymod.addons.cider.v1_21.mixins",
   "compatibilityLevel": "JAVA_21",
-  "refmap": "cider-v1_21.refmap.json",
+  "refmap": "cider.refmap.json",
   "mixins": [],
   "client": [
     "MixinGuiGraphics"
