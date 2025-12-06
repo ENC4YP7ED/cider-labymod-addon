@@ -135,7 +135,7 @@ jobs:
         run: |
           TAG_NAME="nightly"
 
-          # Create or update nightly release with gh CLI
+          # Create nightly release with gh CLI
           gh release create "$TAG_NAME" \
             --title "🌙 Nightly Build" \
             --notes "## 🌙 Cider Addon - Nightly Build
@@ -153,13 +153,19 @@ jobs:
           2. Place in LabyMod addons folder (\`~/.minecraft/labymod-neo/addons\`)
           3. Restart Minecraft
 
+          ### ✨ Features
+          - 🎵 Apple Music integration via Cider
+          - 📊 HUD widgets for now playing
+          - 🔄 Track sharing with other players
+          - 🎮 Multiversion support (MC 1.20-1.21)
+          - 🔧 Version-specific mixins ready for customization
+
           ---
           🤖 Auto-built via GitHub Actions" \
             "$JAR_FILE" \
-            --prerelease 2>/dev/null || \
-          gh release upload "$TAG_NAME" "$JAR_FILE" --clobber
+            --prerelease
 
-          echo "✅ Nightly release created/updated successfully!"
+          echo "✅ Nightly release created successfully!"
           echo "🔗 Release URL: https://github.com/${{ github.repository }}/releases/tag/$TAG_NAME"
 
       - name: Upload build artifacts
