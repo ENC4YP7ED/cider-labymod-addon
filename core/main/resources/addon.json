@@ -7,6 +7,17 @@
   "description": "Display your Apple Music now playing from Cider in Minecraft",
   "icon": "textures/icon.png",
   "category": "MISC",
-  "minecraftVersion": "1.20<1.22",
-  "main": "net.labymod.addons.cider.core.CiderAddon"
+  "compatibleMinecraftVersions": "1.20<1.22",
+  "mainClass": "net.labymod.addons.cider.core.CiderAddon",
+  "requiredLabyModBuild": 2099,
+  "releaseChannel": "production",
+  "os": [],
+  "meta": [],
+  "mavenDependencies": [],
+  "addonDependencies": [],
+  "incompatibles": [],
+  "entrypoints": [],
+  "earlyTransformers": [],
+  "transformers": [],
+  "flint": true
 }
