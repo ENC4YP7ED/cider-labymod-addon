@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "priority": 1000,
+  "package": "net.labymod.addons.cider.core.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "cider.refmap.json",
+  "mixins": [],
+  "client": [
+    "MixinChatHud",
+    "MixinPauseScreen",
+    "MixinInGameHud",
+    "MixinPlayerRenderer",
+    "MixinTitleScreen",
+    "MixinLivingEntityRenderer"
+  ],
+  "server": [],
+  "minVersion": "0.8",
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "verbose": false
+}

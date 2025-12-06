@@ -54,6 +54,28 @@ public class CiderConfiguration extends AddonConfig {
     @SwitchSetting
     private final ConfigProperty<Boolean> showControls = new ConfigProperty<>(true);
 
+    @SwitchSetting
+    private final ConfigProperty<Boolean> showOnTitleScreen = new ConfigProperty<>(true);
+
+    @SwitchSetting
+    private final ConfigProperty<Boolean> showActionBar = new ConfigProperty<>(false);
+
+    // Integration Settings
+    @SettingSection("integration")
+    @SwitchSetting
+    private final ConfigProperty<Boolean> showTrackInChat = new ConfigProperty<>(true);
+
+    @SwitchSetting
+    private final ConfigProperty<Boolean> showPauseScreenControls = new ConfigProperty<>(true);
+
+    @SwitchSetting
+    private final ConfigProperty<Boolean> showMusicNotes = new ConfigProperty<>(false);
+
+    // Performance Settings
+    @SettingSection("performance")
+    @SwitchSetting
+    private final ConfigProperty<Boolean> optimizeRendering = new ConfigProperty<>(true);
+
     // Sharing Settings
     @SettingSection("sharing")
     @SwitchSetting
@@ -98,8 +120,32 @@ public class CiderConfiguration extends AddonConfig {
         return showControls;
     }
 
+    public ConfigProperty<Boolean> showOnTitleScreen() {
+        return showOnTitleScreen;
+    }
+
+    public ConfigProperty<Boolean> showActionBar() {
+        return showActionBar;
+    }
+
+    public ConfigProperty<Boolean> showTrackInChat() {
+        return showTrackInChat;
+    }
+
+    public ConfigProperty<Boolean> showPauseScreenControls() {
+        return showPauseScreenControls;
+    }
+
+    public ConfigProperty<Boolean> showMusicNotes() {
+        return showMusicNotes;
+    }
+
+    public ConfigProperty<Boolean> optimizeRendering() {
+        return optimizeRendering;
+    }
+
     @Override
     public int getConfigVersion() {
-        return 1;
+        return 2;
     }
 }
